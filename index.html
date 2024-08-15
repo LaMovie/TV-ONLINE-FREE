@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <meta charset="UTF-8"/>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+body{
+    background: black;
+}     
+.cont{
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(70px, 1fr));
+    gap: 20px;
+}
+.cont img{
+    border-radius: 8px;
+    width: 100%; height: auto;
+    box-sizing: box-shadow;
+    transition: 1.5s;
+    border: 2px solid blue;
+    box-shadow: 0 0 30px blue;
+}
+.cont img:hover{
+    transform: scale(2) perspective(500px)rotateY(50deg);
+    padding-left: 5px;
+    background: orange;
+    border: 3px solid #4f9;
+    box-shadow: 0 0 30px #4f9;
+}
+.cont:hover img:not(:hover){
+    scale: .8;
+    filter: grayscale(1) blur(5px);
+}
+.ico-1{
+    display: grid;
+    border-radius: 20px;
+    background: gold;
+    padding: 5px;
+    width: 40%;  
+    gap: 6px;  
+}
+.ico-2{
+    display: grid;
+    border-radius: 20px;
+    background: red;
+    padding: 5px;
+    width: 40%;  
+    gap: 6px;  
+}
+.ico-1:hover{
+    transform: scale(1.5);
+}
+.ico-2:hover{
+    transform: scale(1.5);
+}
+#Box {
+        opacity: .5;
+    
+  &:hover {
+        scale: 1.5; 
+     }
+}
+</style>
+
+<style>
+.puff-in-hor {
+	-webkit-animation: puff-in-hor 1s cubic-bezier(0.470, 0.000, 0.745, 0.715) both;
+	        animation: puff-in-hor 1s cubic-bezier(0.470, 0.000, 0.745, 0.715) both;
+}
+
+@-webkit-keyframes puff-in-hor {
+  0% {
+    -webkit-transform: scaleX(2);
+            transform: scaleX(2);
+    -webkit-filter: blur(4px);
+            filter: blur(4px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+    -webkit-filter: blur(0px);
+            filter: blur(0px);
+    opacity: 1;
+  }
+}
+@keyframes puff-in-hor {
+  0% {
+    -webkit-transform: scaleX(2);
+            transform: scaleX(2);
+    -webkit-filter: blur(4px);
+            filter: blur(4px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+    -webkit-filter: blur(0px);
+            filter: blur(0px);
+    opacity: 1;
+  }
+}
+#H {
+    color: gold;
+    opacity: .9;
+    text-align: center;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+  <h2 id ="H">🍿 LA MOVIE 🍿</h2>
+
+     <div class="puff-in-hor">
+
+      <div onclick="playA()" class="cont">
+
+<a href="DARK-PLAY.html"><img class="All" src="https://da.gd/I5tze"/></a>
+
+<a href="BOX-TV.html"><img class="All" src="https://da.gd/4UX9HK"/></a>
+
+<a href="SFNTV.html"><img class="All" src="https://da.gd/LnVd8n"/></a>
+
+<a href="TV-ONLINE.html"><img class="All" src="https://da.gd/jh1v5e"/></a>
+
+<a href="https://lamovievive.blogspot.com/p/preestrenos.html"><img class="All" src="https://da.gd/W0k8wE"/></a>
+
+<a href="X-Tv.html"><img class="All" src="https://da.gd/coUylW"/></a>
+
+<a href="BASS-NATION.html"><img class="All" src="https://da.gd/2B0K"/></a>
+
+<a href="PELIS-FACE.html"><img class="All" src="https://da.gd/Yt8G"/></a>
+
+<a href="MUSIC-TV.html"><img class="All" src="https://da.gd/EJMGy"/></a>
+
+<a href="https://expusofia.blogspot.com/2021/07/teosofia.html"><img class="All" src="https://da.gd/gDW6pC"/></a>
+
+<a href="DATA-BASE.html"><img class="All" src="https://da.gd/5jCoK"/></a>
+
+<a href="VISUAL-ESTUDIO-CODE.html"><img class="All" src="https://da.gd/36go"/></a>
+           </div>
+
+      </div><br/><br/><br/><br/>    
+          
+            <center>
+       <h3 id="Box">⚙️</h3>  
+            
+      <div onclick="playP()">
+      
+     <div class="ico-2"><a href="https://lamovievive.blogspot.com/?m=1">FILMS</div>
+           <br/>
+     
+              </div>   
+         
+         
+<audio id="A" src="https://cdn-cf.vidyard.com/uploads/3940821/govideo/e554dde0-90c7-11ee-8ba3-df4e4260a155.mp4"></audio>
+
+<audio id="P" src="https://cdn-cf.vidyard.com/uploads/3940821/govideo/13e83770-8f2d-11ee-bbe1-5107ab9af334.mp4"></audio>        
+                    
+<script>
+function playA(){
+   var audio =
+document.getElementById('A');
+      audio.play();
+}
+
+function playP(){
+    var audio = 
+document.getElementById('P');
+      audio.play();
+}
+</script>
+
+<script>
+
+  <!-- MULTIPLES COLORES SHADOW -->
+   document.getElementById('Box').addEventListener('click', function() {
+      var elementos = document.getElementsByClassName('All');
+      for (var i = 0; i < elementos.length; i++) {
+        var colorAleatorio = '#' + Math.floor(Math.random()*16777215).toString(16); // Generar un color aleatorio en formato hexadecimal
+        elementos[i].style.boxShadow = '5px 5px 5px ' + colorAleatorio;
+      }
+    });
+    
+ <!-- MULTIPLES COLORES BORDER -->
+   document.getElementById('Box').addEventListener('click', function() {
+      var elementos = document.getElementsByClassName('All');
+      for (var i = 0; i < elementos.length; i++) {
+        var colorAleatorio = '#' + Math.floor(Math.random()*16777215).toString(16); // Generar un color aleatorio en formato hexadecimal
+        elementos[i].style.border = '5px solid ' + colorAleatorio;
+      }
+    });
+</script> 
+
+</body>
+</html> 
+
+
+ 

@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+    <title>Document</title> 
+<style>
+body{   
+    background: black;
+    min-height: 100vh;   
+    align-items: center;
+    display: grid;      
+}
+.contenedor{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; 
+    justify-content: center;
+    background-color: black;
+}
+.contenedor img {
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.contenedor img:hover {
+    transform: scale(1.2);
+}
+#opaco{
+    opacity:0.5;  
+}
+</style>
+</head>
+<body>
+    <center>
+    <div id="player-container">
+        <div id="player"></div>
+    </div>      
+    </center>
+    <div class="contenedor">    
+        <img src="https://da.gd/DktprV" title="BASS-NATION" onclick="loadVideo('872315224')">
+        <img src="https://da.gd/DcV13" title="HARD BASS" onclick="loadVideo('872323071')">
+        <img src="https://da.gd/LIov3" title="TRAP TV" onclick="loadVideo('872413433')"> 
+        <img src="https://da.gd/TVPdSs" title="SALSATON" onclick="loadVideo('872329121')">
+        <img src="https://da.gd/aHO4O" title="MOOMBA" onclick="loadVideo('872334910')">
+        <img src="https://da.gd/2lxO8P" title="RETRO" onclick="loadVideo('872758109')">
+    </div>            
+    <center>
+        <a href="X-Tv.html"><img src="https://da.gd/7KHGb" title="X-Tv"></a>
+    </center>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+<script>
+        function getRandomTime() {
+            return Math.floor(Math.random() * 18000);
+}     
+  function loadVideo(videoId) {
+            var randomTime = getRandomTime();
+            player.loadVideo({
+                id: videoId,
+                autoplay: true,
+                autopause: false
+}).then(function() {
+                player.setCurrentTime(randomTime).then(function(seconds) {
+                    player.play().then(function() {
+                        player.requestFullscreen().catch(function(error) {
+                            console.error('Error al solicitar pantalla completa:', error);
+});
+   }).catch(function(error) {
+                        console.error('Error al reproducir el video:', error);
+});
+    }).catch(function(error) { 
+       console.error('Error al establecer el tiempo de reproducción:', error);
+});
+    }).catch(function(error) {
+    console.error('Error al cargar el video:', error);
+  });
+}
+        var player = new Vimeo.Player('player', {
+            id: "872315224",
+            width: 360,
+            height: 240,
+            autopause: false,
+            autoplay: true
+});        player.ready().then(function() {
+            loadVideo("872315224"); 
+});
+</script>
+</body>
+</html>
