@@ -244,7 +244,15 @@ section div::-webkit-scrollbar { width: var(--scrollbar-width, 0px); height: var
 
 <script>
   Screens.addEventListener('click', function(){
-      Scree();
+       if (iframe.requestFullscreen) {
+    iframe.requestFullscreen();
+  } else if (iframe.mozRequestFullScreen) { // Firefox
+    iframe.mozRequestFullScreen();
+  } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari and Opera
+    iframe.webkitRequestFullscreen();
+  } else if (iframe.msRequestFullscreen) { // IE/Edge
+    iframe.msRequestFullscreen();
+  }
 });
   Horz.addEventListener('click', function(){
       scriptHorz();
@@ -255,7 +263,7 @@ section div::-webkit-scrollbar { width: var(--scrollbar-width, 0px); height: var
 <script>
 var fullscreenButton = document.querySelector('#fullscreenButton');
 var iframe = document.querySelector('iframe');
-
+  
 fullscreenButton.addEventListener('click', function() {
   if (iframe.requestFullscreen) {
     iframe.requestFullscreen();
@@ -266,50 +274,6 @@ fullscreenButton.addEventListener('click', function() {
   } else if (iframe.msRequestFullscreen) { // IE/Edge
     iframe.msRequestFullscreen();
   }
-});
-</script>
- 
-      <!-- Full Screen 2 -->
-<script>
-       function Scree(){           
-    Modal.style.top = '30vh';
-    Sect.style.transform = 'translate(0, 12vh)';   
-    Bloque.style.border = '#000'; 
-   document.body.style.scale = '240%'; 
-   document.body.style.top = '14vh';
-   document.body.style.left = '25vh'; 
-   document.body.style.transform = 'rotate(90deg)';
-   Back.style.display = 'block';
-};
-
-   Back.addEventListener('click', function(){
-     Bloque.style.border = 'green';
-     Back.style.display = 'none';
-     Modal.style.cssText = '';
-     Sect.style.cssText = '';
-  document.body.style.cssText = ''; 
-});  
-</script> 
-
-     <!-- Script Horizontal -->
-<script>
-     function scriptHorz(){
-    Modal.style.top = '10vh';
-    Modal.style.left = '20vh';
-    Sect.style.transform = 'translate(25vh, -20vh)';   
-    Bloque.style.border = '#000'; 
-   document.body.style.scale = '155%'; 
-   document.body.style.top = '-58vh';
-   document.body.style.left = '-13vh'; 
-   Back.style.display = 'block';
-};
-
-   Back.addEventListener('click', function(){
-     Bloque.style.border = 'green';
-     Back.style.display = 'none';
-     Modal.style.cssText = '';
-     Sect.style.cssText = '';
-  document.body.style.cssText = ''; 
 });
 </script>
 
