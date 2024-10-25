@@ -114,7 +114,7 @@ body{
 
      <div class="puff-in-hor">
 
-      <div onclick="playA()" class="cont">
+      <div id="On" onclick="playA()" class="cont">
 
 <a href="DARK-PLAY.html"><img class="All" src="https://da.gd/I5tze"/></a>
 
@@ -192,6 +192,25 @@ document.getElementById('P');
       }
     });
 </script> 
+
+          <!-- DELAY -->
+        
+<script>
+  function Delay(url) {
+    setTimeout(function() {
+      window.location.href = url;
+    }, 1500);
+  }  
+         var images = document.querySelectorAll('#On a');
+
+  images.forEach(function(image) {
+    image.addEventListener('click', function(event) {
+      event.preventDefault(); // Evitar la redirección inmediata
+      var href = this.getAttribute('href'); // Obtiene el href del enlace
+      Delay(href); // Llama a la función con el href
+    });
+  });
+</script>
 
 </body>
 </html> 
