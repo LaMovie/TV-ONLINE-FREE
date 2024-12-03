@@ -1,49 +1,153 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reproductor de Video</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIDA-TV</title>
 <style>
 body {
-    color: gold;
-    text-align: center;
     background: #000;
 }
-#Video {
-    border-radius: 20px;
-    width: 360px; height: 240px;
+#video-container {
+    width: 100%;
+    text-align: center;
 }
-button {
-    border-radius: 20px;
+iframe {
+    width: 90%;
+    height: 200px;
+    aspect-ration: 16/9;
+    border-radius: 5%;
+    border-top: .5vh solid brown;
+    border-left: 2vh solid brown;
+    border-right: .1vh solid brown;
+    border-bottom: 2vh solid #800000;
+}
+.link {
+    background: gold;
+    border-radius:50%;
+    font-weight: bold;
+    border: 2px solid purple;
+}
+.link:hover{
+    transform: scale(1.5) perspective(500px)rotateY(50deg);
+    padding-right: 50px;
+    width: 30%;
     background: orange;
-    color: #000;
+    border: 2px solid green;
+}
+h1 {
+    color: gold;
+}
+#fullscreenButton{
+    background:gray;
+    color:black;
+    opacity:0.5;
+    font-weight:bold;
+    font-size:15px;
+    padding:1px;
+    border-radius:50px;
+}
+#Hr1 {
+    width: 10%;
+    height: 1px;
+    background: gray;
+    transform: rotate(80deg);
+}
+#Hr2 {
+    width: 10%;
+    height: 1px;
+    background: gray;
+    transform: translate(2vh, -1vh)rotate(-80deg);
 }
 </style>
 </head>
-<body>
-        <h1>AIDA</h1>
-    <video id="Video" controls src="https://cdn4.lqsa.es/hls/3/stream.m3u8?cachebust=904b909f" type="video/mp4"></video><br/>
-    <button onclick="playVideo('https://cdn4.lqsa.es/hls/3/stream.m3u8?cachebust=904b909f')">🔗Enlace 1</button>
-    <button onclick="playVideo('https://cdn4.lqsa.es/hls/3/stream.m3u8')">🔗Enlace 2</button>
+<body>        
+             <center>
+      <h1>⚙️AIDA-TV⚙️</h1><br/>
+      
+<hr id="Hr1"/><hr id="Hr2"/>  
+   
+<div id="video-container">
+    <iframe id="random-video" src="" frameborder="0"></iframe>
+</div>
+             
+<h3 style="color: gold; font-family: cursive">📺 AIDA-TV 📺</h3>             
+  
+  <button id="fullscreenButton">Pantalla completa</button>
+       
+       <img id="opaco" src="https://bit.ly/3G2A4hx" alt="Retroceder" style="scale: 70%"/>  
+            </center>
+     
+<script>
+    window.onload = function() {
+        var videos = [
+            'https://archive.org/download/3x-01-source/3x01%28Source%29.mp4',
+            'https://archive.org/download/3x-01-source/3x02%28Source%29.mp4',
+            'https://archive.org/download/3x-01-source/3x03%28Source%29.mp4',
+             'https://archive.org/download/3x-01-source/3x04%28Source%29_1.mp4', 
+             'https://archive.org/download/3x-01-source/3x05%28Source%29_1.mp4', 
+             'https://archive.org/download/3x-01-source/3x06%28Source%29_1.mp4', 
+             'https://archive.org/download/3x-01-source/3x07%28Source%29_1.mp4',
+              'https://archive.org/download/3x-01-source/3x08%28Source%29_1.mp4',
+               'https://archive.org/download/3x-01-source/3x09%28Source%29_1.mp4',
+                'https://archive.org/download/3x-01-source/3x10%28Source%29_1.mp4', 
+                'https://archive.org/download/3x-01-source/3x11%28Source%29_1.mp4',
+                 'https://archive.org/download/3x-01-source/3x12%28Source%29_1.mp4',
+                  'https://archive.org/download/3x-01-source/3x13%28Source%29_1.mp4', 
+                  'https://archive.org/download/3x-01-source/3x14%28Source%29.mp4',
+                   'https://archive.org/download/4x-08-source-1/4x01%28Source%29.mp4',
+                    'https://archive.org/download/4x-08-source-1/4x02%28Source%29.mp4', 
+                    'https://archive.org/download/4x-08-source-1/4x03%28Source%29.mp4', 
+                    'https://archive.org/download/4x-08-source-1/4x04%28Source%29.mp4', 
+                    'https://archive.org/download/4x-08-source-1/4x05%28Source%29.mp4',
+                     'https://archive.org/download/4x-08-source-1/4x06%28Source%29.mp4',
+                     'https://archive.org/download/4x-08-source-1/4x07%28Source%29_1.mp4',
+                     'https://archive.org/download/4x-08-source-1/4x08%28Source%29_1.mp4',
+                     'https://archive.org/download/4x-08-source-1/4x09%28Source%29.mp4',
+                     'https://archive.org/download/4x-08-source-1/4x10%28Source%29.mp4',
+                     'https://archive.org/download/4x-08-source-1/4x11%28Source%29.mp4',
+                     'https://archive.org/download/4x-08-source-1/4x12%28Source%29.mp4',
+                     'https://archive.org/download/4x-08-source-1/4x13%28Source%29.mp4',
+                     'https://archive.org/download/4x-08-source-1/4x14%28Source%29.mp4',
+                     'https://archive.org/download/4x-08-source-1/4x15%28Source%29.mp4',
+                     'https://archive.org/download/4x-08-source-1/4x16%28Source%29.mp4',
+                  'https://archive.org/download/5x-03_202405/5x01%28Source%29.mp4',
+                  'https://archive.org/download/5x-03_202405/5x02%28Source%29.mp4',
+                  'https://archive.org/download/5x-03_202405/5x03.mp4',
+                  'https://archive.org/download/5x-03_202405/5x04.mp4',
+                  'https://archive.org/download/5x-03_202405/5x05.mp4',
+                  'https://archive.org/download/5x-03_202405/5x06%28MP4%29.mp4',
+                  'https://archive.org/download/5x-03_202405/5x07%28MP4%29.mp4',
+                  'https://archive.org/download/5x-03_202405/5x08%28MP4%29.mp4',
+                  'https://archive.org/download/5x-03_202405/5x09%28MP4%29.mp4',
+                  'https://archive.org/download/5x-03_202405/5x10%28MP4%29.mp4'
+                  ];
+
+        var currentIndex = Math.floor(Math.random() * videos.length);
+        var iframe = document.getElementById('random-video');
+        iframe.src = videos[currentIndex];
+    };
+</script>
 
 <script>
-    function playVideo(videoUrl) {
-      Video.src = videoUrl;
-      Video.load();
-      Video.play();
-}    
+var fullscreenButton = document.querySelector('#fullscreenButton');
+var iframe = document.querySelector('iframe');
+
+fullscreenButton.addEventListener('click', function() {
+  if (iframe.requestFullscreen) {
+    iframe.requestFullscreen();
+  } else if (iframe.mozRequestFullScreen) { // Firefox
+    iframe.mozRequestFullScreen();
+  } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari and Opera
+    iframe.webkitRequestFullscreen();
+  } else if (iframe.msRequestFullscreen) { // IE/Edge
+    iframe.msRequestFullscreen();
+  }
+});
 </script>
+
 </body>
 </html>
-
-<!-- https://cdn4.lqsa.es/index-video-only.html -->
-
-
-
-
-
-
-
+     
 
 
