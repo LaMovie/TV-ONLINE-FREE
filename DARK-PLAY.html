@@ -18,7 +18,7 @@ body{
     justify-content: center;
     scale: 100%;
 }
-.div{
+.Div{
     font-size: 23px; 
     background: black;
     color: fuchsia;
@@ -37,7 +37,7 @@ iframe{
     border-radius: 10px;
     background: url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEinuR3l58e9MiWP_hDFssCF5NqAMMhF-rPxTJychbQR8ViB2Y2msjtuYetE3Apf43IQe_mqNG5_8I-HKQbkf-GvRtenXE5fDLEH8kn0wmvBX7MBwtFIvHusDIsB14x1XdAYcay-AqPgXamUKOYE2JVKUEkO1if0bBhsYrpZL1qbpqw5UDhNubuehQzMgng/s498/image_downloader_1700646861820.gif);
 }
-#sum{
+#Sum{
     background: #000060;
     color: #fff;
     font-weight: bold;
@@ -107,7 +107,7 @@ li:hover{-webkit-animation:rotate-scale-up-ver .65s linear both;animation:rotate
          <div class="A">
              <center>                      
  <details open>
-   <summary id="sum">DARK-PLAY</summary><br/>
+   <summary id="Sum">DARK-PLAY</summary><br/><br/><br/>
          
      <div id="Modal"></div>
         <div>        
@@ -116,7 +116,7 @@ li:hover{-webkit-animation:rotate-scale-up-ver .65s linear both;animation:rotate
      </div>
            <div class="A">
          <div class="links">   
-        <div class="div"><br/>
+        <div class="Div"><br/>
 <b><li><a href="https://embed.sdfgnksbounce.com/embed2/multipremier.html" style="color:blue; background-color: black" target="WILLOW">HBO</a></li>        
         
         <li><a href="https://embed.sdfgnksbounce.com/embed2/universalchannel.html" style="color:blue; background-color: black" target="WILLOW">UNIVERSAL</a></li>                
@@ -167,9 +167,10 @@ li:hover{-webkit-animation:rotate-scale-up-ver .65s linear both;animation:rotate
  
  <li><a href="https://embed.sdfgnksbounce.com/embed2/distritocomedia.html" style="color:blue; background-color: black" target="WILLOW">DISTRITO COMEDIA</a></li>
  
- <li><a href="https://embed.sdfgnksbounce.com/embed2/axn.html" style="color:blue; background-color: black" target="WILLOW">AXN</a></li>     
-
-<li><a href="https://lamovie.github.io/AIDA-TV/"><img src="https://da.gd/R0SPFh" title="AIDA"/></a></li> 
+ <li><a href="https://embed.sdfgnksbounce.com/embed2/axn.html" style="color:blue; background-color: black" target="WILLOW">AXN</a></li>
+ 
+  <li><a href="https://lamovie.github.io/AIDA-TV/"><img src="https://da.gd/R0SPFh" title="AIDA"/></a></li> 
+                                       
          <br/>         
         </div>
   </details><br/><br/>              
@@ -228,17 +229,8 @@ fullscreenButton.addEventListener('click', function() {
 </script>
         <!-- HORIZONTAL -->
 <script>
-        function handleOrientationChange() {
-            var orientation = (window.innerWidth > window.innerHeight) ? "Horizontal" : "Vertical";
-            
- document.textContent = `Orientación actual: ${orientation}`;
-            
-            if (orientation === "Horizontal") {
-       <!-- Ejecuta el evento -->
-          evento();           
-  } else {
-      invento();
-  }
+        function Handle() {
+            var orientation = (window.innerWidth > window.innerHeight) ? evento() : invento();        
 }
 
         function evento() {
@@ -382,11 +374,21 @@ iframe{
 `;        document.head.appendChild(style);
 }
 
- window.addEventListener("resize", handleOrientationChange);
+ window.addEventListener("resize", Handle);
 
   <!-- Llama a la función al cargar la página para establecer el estado inicial -->
-      handleOrientationChange();
-</script>       
+      Handle();
+</script>    
+
+<script>
+   var Div = document.querySelector('.Div');
+   
+ Div.onclick = function(event){
+     if(event.target.tagName === 'A'){
+     Sum.textContent = '📺' + event.target.textContent;
+  }
+ };
+</script>   
 </body>
 </html> 
        
