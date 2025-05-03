@@ -227,11 +227,26 @@ fullscreenButton.addEventListener('click', function() {
     iframe.msRequestFullscreen();
   }
 });
+
+<!-- Detectar cuando entra o sale de fullscreen -->
+document.addEventListener('fullscreenchange', function() {
+  if (document.fullscreenElement) {
+    <!-- Si estamos en pantalla completa, bloquear orientación horizontal -->
+    if (screen.orientation && screen.orientation.lock) {
+      screen.orientation.lock('landscape');
+    }
+  } else {
+    <!-- Si salimos de pantalla completa, volver a orientación vertical -->
+    if (screen.orientation && screen.orientation.lock) {
+      screen.orientation.lock('portrait');
+    }
+  }
+});
 </script>
         <!-- HORIZONTAL -->
 <script>
         function Handle() {
-            var orientation = (window.innerWidth > window.innerHeight) ? evento() : invento();        
+            var orientation = (window.innerWidth > window.innerHeight) ? evento() : invento();         
 }
 
         function evento() {
@@ -390,6 +405,34 @@ iframe{
   }
  };
 </script>   
+
+        <!-- WINDOWS PC -->
+<script>
+  window.onload = function() {
+       if (!/Mobi|Android/i.test(navigator.userAgent)) {
+        var style = document.createElement('style');
+   style.innerHTML = `
+<style>
+#Modal {
+    display: none;
+}
+.Div::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background: transparent;
+}
+.Div::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #80808080;
+}
+.Div::-webkit-scrollbar-track {
+    background: transparent; 
+}
+</style>     
+`;        document.head.appendChild(style);
+  }
+};
+</script>
 </body>
 </html> 
        
@@ -399,4 +442,4 @@ iframe{
         
         
         
-        
+     
