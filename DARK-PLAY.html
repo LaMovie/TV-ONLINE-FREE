@@ -194,18 +194,17 @@ li:hover{-webkit-animation:rotate-scale-up-ver .65s linear both;animation:rotate
                </div> 
  
 <script>
-const textos = [
+var textos = [
   "🔥 LA MOVIE...",
   "...DE JOE...",
   "...FREE TV🔥",
  
 ];
 
-const divTextos = document.getElementById('sum');
 let index = 0;
 
 function cambiarTextoInfinito() {
-  divTextos.textContent = textos[index];
+  Sumx.textContent = textos[index];
   index = (index + 1) % textos.length;
 }
 
@@ -432,6 +431,32 @@ iframe{
 `;        document.head.appendChild(style);
   }
 };
+</script>
+
+<script>
+  var D = document.querySelector('.Div');
+  var L = D.querySelectorAll('li');
+  var colorOriginal = 'blue'; 
+
+  L.forEach(item => {
+    var enlace = item.querySelector('a'); 
+    if (enlace) {
+      enlace.style.color = colorOriginal; 
+ };
+
+    item.onclick = () => {
+      L.forEach(otroItem => { 
+        var otroEnlace = otroItem.querySelector('a');
+        if (otroEnlace) {
+          otroEnlace.style.color = colorOriginal; 
+        }
+      });
+      var enlaceClicado = item.querySelector('a');
+      if (enlaceClicado) {
+    enlaceClicado.style.color = 'fuchsia'; 
+      }
+    };
+  });
 </script>
 </body>
 </html> 
