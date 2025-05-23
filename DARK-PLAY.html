@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html Lang="en">
 <head>
-    <meta charset="UFT-8"/>
+    <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" contect="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     
@@ -212,7 +212,7 @@ function cambiarTextoInfinito() {
   index = (index + 1) % textos.length;
 }
 
-setInterval(cambiarTextoInfinito, 2000); // Cambia el texto cada 2 segundos
+setInterval(cambiarTextoInfinito, 2000); 
 </script>
        <!-- FULL SCREEN -->
 <script>
@@ -436,39 +436,18 @@ iframe{
   }
 };
 </script>
-
 <script>
-  var D = document.querySelector('.Div');
-  var L = D.querySelectorAll('li');
-  var colorOriginal = 'blue'; 
+  var LINKS = document.querySelectorAll('.Div li a');
 
-  L.forEach(item => {
-    var enlace = item.querySelector('a'); 
-    if (enlace) {
-      enlace.style.color = colorOriginal; 
- };
-
-    item.onclick = () => {
-      L.forEach(otroItem => { 
-        var otroEnlace = otroItem.querySelector('a');
-        if (otroEnlace) {
-          otroEnlace.style.color = colorOriginal; 
-        }
-      });
-      var enlaceClicado = item.querySelector('a');
-      if (enlaceClicado) {
-    enlaceClicado.style.color = 'fuchsia'; 
-      }
-    };
-  });
+ LINKS.forEach(links => {
+  links.onclick = (event) => {
+     LINKS.forEach(other => {
+        other.style.color = 'blue';
+  });      
+      links.style.color = 'fuchsia';
+   };
+});
 </script>
 </body>
 </html> 
        
-        
-        
-        
-        
-        
-        
-     
