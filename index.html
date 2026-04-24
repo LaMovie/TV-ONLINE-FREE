@@ -118,7 +118,7 @@ a {
 
 <a href="TV-ONLINE.html"><img class="All" src="https://da.gd/jh1v5e"/></a>
 
-<a href="https://www.xvideos.com/video.imhedc7c5/madurita_kinky_se_folla_a_una_polla_negra_en_un_video_interracial"><img class="All" src="https://da.gd/coUylW"/></a>
+<a href=""><img class="All" id="X" src="https://da.gd/coUylW"/></a>
 
 <a href="https://lamovie.github.io/CONTENIDO/SPORT-TV.html"><img class="All" src="https://is.gd/cPBeiP"/></a>
 
@@ -153,13 +153,13 @@ a {
 <script>
 
   <!-- MULTIPLES COLORES SHADOW -->
-   document.getElementById('Box').addEventListener('click', function() {
+   Box.onclick = () => {
       var elementos = document.getElementsByClassName('All');
       for (var i = 0; i < elementos.length; i++) {
         var colorAleatorio = '#' + Math.floor(Math.random()*16777215).toString(16); // Generar un color aleatorio en formato hexadecimal
         elementos[i].style.boxShadow = '5px 5px 5px ' + colorAleatorio;
       }
-    });
+    };
     
  <!-- MULTIPLES COLORES BORDER -->
    document.getElementById('Box').addEventListener('click', function() {
@@ -169,6 +169,16 @@ a {
         elementos[i].style.border = '5px solid ' + colorAleatorio;
       }
     });
+    
+    X.onclick = () => {
+        var PASS = prompt('Contraseña🔑: 👇🏽').toLowerCase().trim();
+        
+      if (PASS === 'sex') {
+          window.open('https://www.xvideos.com/video.imhedc7c5/madurita_kinky_se_folla_a_una_polla_negra_en_un_video_interracial');
+      } else {
+          alert('NEGATIVO! ⚠️No Apto Para Menores ⚠️');
+      }
+    }
 </script> 
 
           <!-- DELAY -->
