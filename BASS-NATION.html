@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+    <title>BASS NATION</title> 
+<style>
+body{   
+    background: black;
+    min-height: 100vh;   
+    align-items: center;
+    display: grid;      
+}
+.contenedor{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; 
+    justify-content: center;
+    background-color: black;
+}
+.contenedor img {
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.contenedor img:hover {
+    transform: scale(1.2);
+}
+#opaco{
+    opacity:0.5;  
+}
+#TTT {
+    color: gray;
+    font-size: 12px;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+            <center>         
+    <div id="player-container">
+        <div id="player"></div>
+    </div>      
+    <p id="TTT">BASS-NATION</p>
+           </center>
+    <div class="contenedor">    
+        <img id="NATION" src="https://da.gd/DktprV" title="BASS-NATION" onclick="loadVideo('872315224')">
+        <img id="HARD" src="https://da.gd/DcV13" title="HARD BASS" onclick="loadVideo('872323071')">
+        <img id="TRAP" src="https://da.gd/LIov3" title="TRAP TV" onclick="loadVideo('872413433')"> 
+        <img id="SALSATON" src="https://da.gd/TVPdSs" title="SALSATON" onclick="loadVideo('872329121')">
+        <img id="MOOMBA" src="https://da.gd/aHO4O" title="MOOMBA" onclick="loadVideo('872334910')">
+        <img id="RETRO" src="https://da.gd/2lxO8P" title="RETRO" onclick="loadVideo('872758109')">
+    </div>            
+    
+    <script src="https://player.vimeo.com/api/player.js"></script>
+<script>
+        function getRandomTime() {
+            return Math.floor(Math.random() * 18000);
+}     
+  function loadVideo(videoId) {
+            var randomTime = getRandomTime();
+            player.loadVideo({
+                id: videoId,
+                autoplay: true,
+                autopause: false
+}).then(function() {
+                player.setCurrentTime(randomTime).then(function(seconds) {
+                    player.play().then(function() {
+                        player.requestFullscreen().catch(function(error) {
+                            console.error('Error al solicitar pantalla completa:', error);
+});
+   }).catch(function(error) {
+                        console.error('Error al reproducir el video:', error);
+});
+    }).catch(function(error) { 
+       console.error('Error al establecer el tiempo de reproducción:', error);
+});
+    }).catch(function(error) {
+    console.error('Error al cargar el video:', error);
+  });
+}
+  
+        var player = new Vimeo.Player('player', {
+            id: "872315224",
+            width: 360,
+            height: 240,
+            autopause: false,
+            autoplay: true
+});        player.ready().then(function() {
+            loadVideo("872315224"); 
+});
+      NATION.onclick = () => {
+      loadVideo('872315224');
+  TTT.textContent = NATION.title;
+  }  
+     HARD.onclick = () => {
+      loadVideo('872323071');
+  TTT.textContent = HARD.title;
+  }
+     TRAP.onclick = () => {
+      loadVideo('872413433');
+  TTT.textContent = TRAP.title;
+  }
+     SALSATON.onclick = () => {
+      loadVideo('872329121');
+  TTT.textContent = SALSATON.title;
+  }
+     MOOMBA.onclick = () => {
+      loadVideo('872334910');
+  TTT.textContent = MOOMBA.title;
+  }
+     RETRO.onclick = () => {
+      loadVideo('872758109');
+  TTT.textContent = RETRO.title;
+  }
+</script>
+</body>
+</html>
