@@ -13,7 +13,7 @@
             --blanco: #ffffff;
             --fondo: #f8f9fa;
             --peligro: #f83709;
-            --whatsapp: #25d366;
+            --correo-btn: #007bff;
             --texto-suave: #6c757d;
 }
 body {
@@ -113,16 +113,16 @@ body {
         .btn-accion:active { transform: scale(0.96); }
         .btn-accion:hover { filter: brightness(1.1); }
 
-        .btn-whatsapp {
-            background-color: var(--whatsapp);
+        .btn-enviar {
+            background-color: var(--correo-btn);
             color: var(--blanco);
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
         }
 
         .btn-limpiar {
             background-color: var(--peligro);
             color: var(--blanco);
-            flex: 0.4; /* Lo hace un poco más pequeño que el de enviar */
+            flex: 0.4;
         }
 
         /* Contenedor Principal de Platos */
@@ -131,7 +131,7 @@ body {
             max-width: 500px;
             padding: 20px;
             box-sizing: border-box;
-            padding-bottom: 80px; /* Espacio para respirar al final */
+            padding-bottom: 80px; 
         }
 
         .titulo-principal {
@@ -234,7 +234,7 @@ body {
 
         .btn-agregar:active { transform: scale(0.92); }
 
-        /* --- ESTILOS DEL NUEVO MODAL --- */
+        /* Estilos del Modal */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -293,14 +293,17 @@ body {
             color: var(--texto-suave);
         }
         .btn-confirmar {
-            background: var(--whatsapp);
+            background: var(--correo-btn);
             color: var(--blanco);
+        }
+        .btn-confirmar:disabled {
+            background: #a0c4ff;
+            cursor: not-allowed;
         }
 </style>
 </head>
 <body>
 
-    <!-- Cabecera / Carrito Fijo -->
     <div class="resumen-pedido" id="panel-resumen">
         <div class="resumen-header">
             <h3>Tu Orden</h3>
@@ -320,15 +323,13 @@ body {
             <button class="btn-accion btn-limpiar" onclick="limpiarPedido()" title="Limpiar todo">
                 🗑️
             </button>
-            <button class="btn-accion btn-whatsapp" onclick="abrirModalNombre()">
-                🚀 Enviar a WhatsApp
+            <button class="btn-accion btn-enviar" onclick="abrirModalNombre()">
+                🚀 Enviar Pedido
             </button>
         </div>
     </div>
 
-         <!-- Menú -->
     <div class="main-container">
-        
         <h1 class="titulo-principal">Nuestro Menú</h1>
 
         <h2 class="seccion-titulo">Principales</h2>
@@ -369,14 +370,13 @@ body {
         </div>
     </div>
 
-    <!-- NUEVO: Modal para pedir el nombre -->
     <div id="modal-nombre" class="modal-overlay">
         <div class="modal-content">
             <h3>¿A nombre de quién es el pedido?</h3>
             <input type="text" id="input-nombre" placeholder="Escribe tu nombre aquí..." autocomplete="off">
             <div class="modal-botones">
                 <button class="btn-modal btn-cancelar" onclick="cerrarModal()">Cancelar</button>
-                <button class="btn-modal btn-confirmar" onclick="confirmarEnvio()">Ir a WhatsApp 🚀</button>
+                <button class="btn-modal btn-confirmar" onclick="confirmarEnvio()">Confirmar Envío 🚀</button>
             </div>
         </div>
     </div>
@@ -385,113 +385,137 @@ body {
     let carrito = [];
     let totalGlobal = 0;
 
-        function sumarAlPedido(nombre, precio) {
- carrito.push({ nombre, precio });
-       totalGlobal += precio;
-       renderizarResumen();
- }
+    function sumarAlPedido(nombre, precio) {
+        carrito.push({ nombre, precio });
+        totalGlobal += precio;
+        renderizarResumen();
+    }
 
     function limpiarPedido() {
-  if(carrito.length === 0) return;
-    // Confirmación visual breve opcional
-    if(confirm("¿Estás seguro de que deseas vaciar tu pedido?")) {
-           carrito = [];
-           totalGlobal = 0;
-           renderizarResumen();
-     }
-   }
+   if(carrito.length === 0) return;
+        if(confirm("¿Estás seguro de que deseas vaciar tu pedido?")) {
+            carrito = [];
+            totalGlobal = 0;
+            renderizarResumen();
+        }
+    }
 
-   function renderizarResumen() {
-          const contenedor = document.getElementById('lista-items');
-          const totalTxt = document.getElementById('monto-total');
-          const contador = document.getElementById('contador-items');
+    function renderizarResumen() {
+        const contenedor = document.getElementById('lista-items');
+        const totalTxt = document.getElementById('monto-total');
+        const contador = document.getElementById('contador-items');
             
-    if (carrito.length === 0) {
-      contenedor.innerHTML = '<p style="color: #888; font-size: 0.9rem; text-align: center; margin: 10px 0;">Aún no hay productos en tu orden.</p>';
-     totalTxt.innerText = '$0';
-      contador.innerText = '0';
-                return;
-   }
+        if (carrito.length === 0) {
+            contenedor.innerHTML = '<p style="color: #888; font-size: 0.9rem; text-align: center; margin: 10px 0;">Aún no hay productos en tu orden.</p>';
+       totalTxt.innerText = '$0';
+       contador.innerText = '0';
+            return;
+        }
 
-       let agrupado = {};
-       carrito.forEach(item => {
-           if (agrupado[item.nombre]) {
-               agrupado[item.nombre].cantidad++;
-               agrupado[item.nombre].subtotal += item.precio;
-           } else {
-               agrupado[item.nombre] = { cantidad: 1, subtotal: item.precio };
-           }
-       });
+        let agrupado = {};
+        carrito.forEach(item => {
+            if (agrupado[item.nombre]) {
+                agrupado[item.nombre].cantidad++;
+                agrupado[item.nombre].subtotal += item.precio;
+            } else {
+                agrupado[item.nombre] = { cantidad: 1, subtotal: item.precio };
+            }
+        });
 
-      contenedor.innerHTML = '';
-       for (let nombre in agrupado) {
-       contenedor.innerHTML += `
-     <div class="item-linea">
-   <span>• ${agrupado[nombre].cantidad}x ${nombre}</span>
-            <span style="font-weight: bold;">$${agrupado[nombre].subtotal.toLocaleString('es-CL')}</span>
-          </div>
-                `;
-  }
+        contenedor.innerHTML = '';
+        for (let nombre in agrupado) {
+            contenedor.innerHTML += `
+            <div class="item-linea">
+                <span>• ${agrupado[nombre].cantidad}x ${nombre}</span>
+                <span style="font-weight: bold;">$${agrupado[nombre].subtotal.toLocaleString('es-CL')}</span>
+            </div>
+            `;
+        }
 
-       totalTxt.innerText = `$${totalGlobal.toLocaleString('es-CL')}`;
-contador.innerText = carrito.length;
-
-     // Auto-scroll al último elemento añadido para que el cliente vea que se sumó
+        totalTxt.innerText = `$${totalGlobal.toLocaleString('es-CL')}`;
+        contador.innerText = carrito.length;
         contenedor.scrollTop = contenedor.scrollHeight;
-   }
-
-    // --- NUEVAS FUNCIONES PARA EL MODAL ---
+    }
 
     function abrirModalNombre() {
-      if (carrito.length === 0) {
-           alert("Por favor, agrega al menos un producto antes de enviar.");
-             return;
-      }
-      // Muestra el modal
-      document.getElementById('modal-nombre').style.display = 'flex';
-      // Coloca el cursor automáticamente en el campo de texto
-      document.getElementById('input-nombre').focus();
+        if (carrito.length === 0) {
+            alert("Por favor, agrega al menos un producto antes de enviar.");
+            return;
+        }
+        document.getElementById('modal-nombre').style.display = 'flex';
+        document.getElementById('input-nombre').focus();
     }
 
     function cerrarModal() {
-      document.getElementById('modal-nombre').style.display = 'none';
-      document.getElementById('input-nombre').value = '';
+        document.getElementById('modal-nombre').style.display = 'none';
+        document.getElementById('input-nombre').value = '';
     }
 
     function confirmarEnvio() {
-       let nombreCliente = document.getElementById('input-nombre').value;
+        let nombreCliente = document.getElementById('input-nombre').value;
        
-       if (nombreCliente.trim() === "") {
-           alert("Necesitamos tu nombre para identificar el pedido.");
-           document.getElementById('input-nombre').focus();
-           return;
-       }
+        if (nombreCliente.trim() === "") {
+            alert("Necesitamos tu nombre para identificar el pedido.");
+            document.getElementById('input-nombre').focus();
+            return;
+        }
 
-       const numero = "56997558314";
-       let mensaje = `¡Hola! Soy *${nombreCliente.trim()}* y quisiera realizar el siguiente pedido:%0A%0A`;
-            
-       let agrupado = {};
-       carrito.forEach(item => {
-           if (agrupado[item.nombre]) {
-               agrupado[item.nombre].cantidad++;
-               agrupado[item.nombre].subtotal += item.precio;
-           } else {
-               agrupado[item.nombre] = { cantidad: 1, subtotal: item.precio };
-           }
-       });
+        // Mostrar estado de carga en el botón
+        const btnConfirmar = document.querySelector('.btn-confirmar');
+        const textoOriginal = btnConfirmar.innerText;
+        btnConfirmar.innerText = "Enviando... ⏳";
+        btnConfirmar.disabled = true;
 
-       for (let nombre in agrupado) {
-            mensaje += `${agrupado[nombre].cantidad}x ${nombre} - $${agrupado[nombre].subtotal.toLocaleString('es-CL')}%0A`;
-       }
+        // Construir el detalle del pedido en formato de lista con saltos de línea
+        let detallePedido = "";
+        let agrupado = {};
+        
+        carrito.forEach(item => {
+            if (agrupado[item.nombre]) {
+                agrupado[item.nombre].cantidad++;
+                agrupado[item.nombre].subtotal += item.precio;
+            } else {
+                agrupado[item.nombre] = { cantidad: 1, subtotal: item.precio };
+            }
+        });
 
-       mensaje += `%0A*Total a pagar: $${totalGlobal.toLocaleString('es-CL')}*%0A%0AMuchas gracias.`;
+        // Usamos \n para los saltos de línea para que llegue bien estructurado al correo
+        for (let nombre in agrupado) {
+            detallePedido += `${agrupado[nombre].cantidad}x ${nombre} - $${agrupado[nombre].subtotal.toLocaleString('es-CL')}\n`;
+        }
 
-       const url = `https://wa.me/${numero}?text=${mensaje}`;
-       window.open(url, '_blank');
-
-       // Cierra el modal automáticamente después de enviar
-       cerrarModal();
- }
+        // Usar Fetch API para enviar el correo en segundo plano
+        fetch("https://formsubmit.co/ajax/EXPUSUPRA@proton.me", {
+            method: "POST",
+            headers: { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                _subject: `🍔 Nuevo Pedido de ${nombreCliente.trim()}`,
+                "Nombre del Cliente": nombreCliente.trim(),
+                "Detalle del Pedido": detallePedido,
+                "Total a Pagar": `$${totalGlobal.toLocaleString('es-CL')}`
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert("¡Tu pedido fue enviado con éxito!");
+            carrito = []; // Vaciar carrito tras envío exitoso
+            totalGlobal = 0;
+            renderizarResumen();
+            cerrarModal();
+        })
+        .catch(error => {
+            alert("Hubo un error de conexión. Por favor, intenta de nuevo.");
+            console.error(error);
+        })
+        .finally(() => {
+            // Restaurar el botón a su estado normal
+            btnConfirmar.innerText = textoOriginal;
+            btnConfirmar.disabled = false;
+        });
+    }
 </script>
 </body>
 </html>
